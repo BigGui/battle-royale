@@ -1,7 +1,7 @@
 /**
  * Display all characters available
  * @param {object} characters
- */
+*/
 function displayCharacters(characters) {
   for (const c of characters) {
     showTemplates("character-choice", "characters-list", c);
@@ -13,7 +13,7 @@ function displayCharacters(characters) {
  * @param {string} templeteId - id of the template
  * @param {String} injectedId - id of the injected element
  * @param {object} object - an object with name, image, id
- */
+*/
 function showTemplates(templeteId, injectedId, object) {
   const playerTemplate = document.getElementById(templeteId);
   const player = document.importNode(playerTemplate.content, true);
@@ -36,25 +36,43 @@ function showTemplatesFromHtml(templeteId, injectedId, object, characters) {
   player.querySelector(".js-player-img").dataset.idImg = object.dataset.idImg;
   player.querySelector(".js-player").dataset.id = object.dataset.idImg;
   player.querySelector(".js-player-features").textContent =
-    characters[object.dataset.idImg].appearance.gender;
-  console.log(object.dataset.idImg);
+  characters[object.dataset.idImg].appearance.gender;
   selectedCharacter.appendChild(player);
-  return characters[object.dataset.idImg];
+  return [object.dataset.idImg];
 }
 
-const allCharacters = [];
+/**
+ * find a chracter by id
+ * @param {array} characters un list of charachters
+ * @param {string} idNumberTxt un number in text format ex "10"
+ * @returns {object} un character
+ */
+function findCharactersByID(characters, idNumberTxt) {
+  for (const c of characters) {
+    console.log(c.id);
+    if (c.id === parseInt(idNumberTxt)) {
+      console.log(c);
+      return c;
+    }
+  }
+}
+
+
+
+
 async function waitingForResponse() {
   try {
     const response = await fetch(
       "https://akabab.github.io/superhero-api/api/all.json"
     );
+
+
     const characters = await response.json();
-    console.table(characters);
-    // console.log(characters[0].appearance.gender);
+
+    console.log(characters);
     displayCharacters(characters);
 
-    const clickedCharactersList = [];
-
+ 
     const charactersLst = document.getElementById("characters-list");
     charactersLst.addEventListener("click", function (e) {
       const clickedCharacter = showTemplatesFromHtml(
@@ -63,12 +81,16 @@ async function waitingForResponse() {
         e.target,
         characters
       );
-
-      console.log(clickedCharacter);
+      clickedCharactersList.push(clickedCharacter);
     });
+
+    
+
+    const clickedCharactersList = [];
+
   } catch (error) {
+    ("");
     console.error("Unable to load character datas from the server : " + error);
   }
 }
-
 waitingForResponse();
