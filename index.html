@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Battle Royale</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
 
-    <h1>Choix des personnages</h1>
+    <h1>Bataille de champions</h1>
+    <h2>Sélection personnages</h2>
+    <ul id="selected-characters-lst" class="characters-list">
+        <template id="selected-character">
+            <li class="js-player" data-id="">
+                <h2 class="js-player-name" id=""> </h2>
+                <img class="js-player-img" data-id-img="" src="">
+            </li>
 
+        </template>
+    </ul>
 
-    <template id = "character-choice">
+    <h2>Tous les personnages</h2>
+    <ul id="characters-list" class="characters-list">
+        <template id="character-choice">
+            <li class="js-player" data-id="">
+                <h2 class="js-player-name" id=""> </h2>
+                <img class="js-player-img" src="" data-id-img="" alt="">
+            </li>
 
-    <form action="">
-      <label class="js-player-label" for="player1">Veuillez choisir le personnage du joueur 1:</label>
-      <select class="js-player-selection" name="player1" id="player1">
-        <option class="js-player-name" value="Choix">CHOIX</option>
-      </select>
-      <br><br>
-      <input type="submit" value="Submit">
-    </form>
-      
-</template>
+        </template>
+    </ul>
 
 
 
     <!-- <script src="js/script-oop.js"></script> -->
     <script src="js/script-api.js"></script>
 </body>
+
 </html>
